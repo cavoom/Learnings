@@ -9,13 +9,13 @@ var ddb = new AWS.DynamoDB({apiVersion: '2012-08-10'});
 var params = {
   AttributeDefinitions: [
     {
-      AttributeName: 'CUSTOMER_ID',
-      AttributeType: 'N'
+      AttributeName: 'id',
+      AttributeType: 'S'
     }
   ],
   KeySchema: [
     {
-      AttributeName: 'CUSTOMER_ID',
+      AttributeName: 'id',
       KeyType: 'HASH'
     }
   ],
@@ -23,7 +23,7 @@ var params = {
     ReadCapacityUnits: 1,
     WriteCapacityUnits: 1
   },
-  TableName: 'CUSTOMER_LIST2',
+  TableName: 'twentyOneTable',
   StreamSpecification: {
     StreamEnabled: false
   }

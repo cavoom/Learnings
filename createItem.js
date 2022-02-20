@@ -7,11 +7,9 @@ AWS.config.update({region: 'us-east-1'});
 var ddb = new AWS.DynamoDB({apiVersion: '2012-08-10'});
 
 var params = {
-  TableName: 'CUSTOMER_LIST2',
+  TableName: 'twentyOneTable',
   Item: {
-    'CUSTOMER_ID' : {N: '2'},
-    'CUSTOMER_NAME' : {S: 'Richard Roe 2'},
-    'Stuff' :  {S: 'likes art'}
+    'id' : {S: '2tjgasfadl;jk678tsgsg'}
   }
 };
 
