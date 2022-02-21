@@ -1,7 +1,6 @@
 // This one will scan through DB and pull out the record
 // with a specific value in a specific table column
-
-
+// no key needed
 
     // Load the AWS SDK for Node.js.
     var AWS = require("aws-sdk");
@@ -10,6 +9,16 @@
     
     // Create DynamoDB service object.
     var ddb = new AWS.DynamoDB({ apiVersion: "2012-08-10" });
+
+    // Create an array (use PUSH instead of this method!!!)
+    var rulesArray = [];
+    rulesArray[0] = {};
+    rulesArray[1] = {};
+    rulesArray[2] = {};
+    rulesArray[3] = {};
+    rulesArray[4] = {};
+
+
     
     const params = {
       // Specify which items in the results are returned.
@@ -17,14 +26,14 @@
 
     // ****** COMMENTED OUT FOR TEST
     // FilterExpression: "campaignCode = :campaign",
-    FilterExpression: "id = :theUserId",
+    FilterExpression: "thing = :theThing",
 
       // Define the expression attribute value, which are substitutes for the values you want to compare.
       ExpressionAttributeValues: {
 
     // ****** COMMENTED OUT FOR TEST
      // ":campaign": {S: "aaa"}
-     ":theUserId" : {S: "amzn1.ask.account.AF423XPDEBEAV5LOUMXGL4FUGNH2K6W4CZLIG32UGNSCWTQOTBPSOJFVW23365CG35FLPRYACBFYELICFPBR7IRV2ST3AXW4H6MF3XJ4Q24RTBNN2B6DIOYRMYFQLDLLTF2LQMRLOSM6C7RTZKFFMFPDVSNXGG4FZ3G2IVEBL3E267DXVPGTZN24ZYB32OVZJPW3FUIYSI6P27I"}
+     ":theThing" : {S: "hockey"}
       
   
       },
@@ -41,8 +50,10 @@
         console.log("Error", err);
       } else {
         data.Items.forEach(function (element, index, array) {
-          // This will print the names in the object
-        console.log(element.name.S);
+        rulesArray[index].theId = element.id;
+        rulesArray[index].theSport = element.thing
+        console.log(rulesArray[index].theId,rulesArray[index].theSport);
+
         });
       }
     });
