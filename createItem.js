@@ -6,10 +6,19 @@ AWS.config.update({region: 'us-east-1'});
 // Create the DynamoDB service object
 var ddb = new AWS.DynamoDB({apiVersion: '2012-08-10'});
 
+var scoreArray = {
+  name: 'Dave',
+  id: 'wwww234567yu123',
+  sport: 'biking hiking'
+}
+
+
 var params = {
   TableName: 'twentyOneTable',
   Item: {
-    'id' : {S: '2tjgasfadl;jk678tsgsg'}
+    'id' : {S: scoreArray.id},
+    'sport' : {S: scoreArray.sport},
+    'thing' : {N: '6'}
   }
 };
 
