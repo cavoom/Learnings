@@ -11,38 +11,28 @@
     var ddb = new AWS.DynamoDB({ apiVersion: "2012-08-10" });
 
     // Create an array (use PUSH instead of this method!!!)
-    var rulesArray = [];
-    rulesArray[0] = {};
-    rulesArray[1] = {};
-    rulesArray[2] = {};
-    rulesArray[3] = {};
-    rulesArray[4] = {};
+    var responseArray = [];
 
-
-    
     const params = {
-      // Specify which items in the results are returned.
+    // Specify which items in the results are returned.
     //   FilterExpression: "Subtitle = :topic AND Season = :s AND Episode = :e",
 
-    // ****** COMMENTED OUT FOR TEST
-    // FilterExpression: "campaignCode = :campaign",
-    FilterExpression: "thing = :theThing",
+    // This is for filtering by campaign name
+    // You need to create a variable that represents the DynamoDB column name
+    FilterExpression: "campaign = :theCampaign",
 
-      // Define the expression attribute value, which are substitutes for the values you want to compare.
-      ExpressionAttributeValues: {
+    // Define the expression attribute value, which are substitutes for the values you want to compare.
+    ExpressionAttributeValues: {
 
-    // ****** COMMENTED OUT FOR TEST
-     // ":campaign": {S: "aaa"}
-     ":theThing" : {S: "hockey"}
+    // Set the filter to only find records of campaign = Triple A
+     ":theCampaign" : {S: "Triple A"}
       
   
       },
       // Set the projection expression, which are the attributes that you want.
-      //ProjectionExpression: "Season, Episode, Title, Subtitle",
+      //ProjectionExpression: "campaign, user_response, assistant_response",
       
-      // ****** COMMENTED OUT FOR TEST
-      // TableName: "CUSTOMER_LIST2",
-      TableName: "twentyOneTable",
+      TableName: "admr_questions",
     };
     
     ddb.scan(params, function (err, data) {
@@ -50,10 +40,10 @@
         console.log("Error", err);
       } else {
         data.Items.forEach(function (element, index, array) {
-        rulesArray[index].theId = element.id;
-        rulesArray[index].theSport = element.thing
-        console.log(rulesArray[index].theId,rulesArray[index].theSport);
 
+        // Do a push fn here to put in an array that we return
+        // For Test
+        console.log(element.id.S,"||", element.campaign.S, "||", element.user_response.S, "||", element.assistant_response.S)
         });
       }
     });
