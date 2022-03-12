@@ -43,7 +43,9 @@
 
         // Do a push fn here to put in an array that we return
         // For Test
-        console.log(element.id.S,"||", element.campaign.S, "||", element.user_response.S, "||", element.assistant_response.S)
-        });
+        //console.log(element.id.S,"||", element.campaign.S, "||", element.user_response.S, "||", element.assistant_response.S)
+        responseArray.push(element);
+        console.log(responseArray)
+        })
       }
     });
