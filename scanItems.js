@@ -16,36 +16,31 @@
     const params = {
     // Specify which items in the results are returned.
     //   FilterExpression: "Subtitle = :topic AND Season = :s AND Episode = :e",
-
     // This is for filtering by campaign name
     // You need to create a variable that represents the DynamoDB column name
     FilterExpression: "campaign = :theCampaign",
 
     // Define the expression attribute value, which are substitutes for the values you want to compare.
     ExpressionAttributeValues: {
-
     // Set the filter to only find records of campaign = Triple A
-     ":theCampaign" : {S: "Triple A"}
-      
-  
+     ":theCampaign" : {S: "1"}  
       },
       // Set the projection expression, which are the attributes that you want.
       //ProjectionExpression: "campaign, user_response, assistant_response",
-      
       TableName: "admr_questions",
     };
     
-    ddb.scan(params, function (err, data) {
+    ddb.scan(params, function (err, data){
       if (err) {
-        console.log("Error", err);
+        console.log("Error", err)
       } else {
-        data.Items.forEach(function (element, index, array) {
-
+        data.Items.forEach(function (element, index, array){
         // Do a push fn here to put in an array that we return
         // For Test
         //console.log(element.id.S,"||", element.campaign.S, "||", element.user_response.S, "||", element.assistant_response.S)
         responseArray.push(element);
+        
+        }) // for each
         console.log(responseArray)
-        })
-      }
-    });
+      } // else
+    })

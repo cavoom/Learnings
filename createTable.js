@@ -34,6 +34,6 @@ ddb.createTable(params, function(err, data) {
   if (err) {
     console.log("Error", err);
   } else {
-    console.log("Table Created", data);
+    console.log("Table Created:", data);
   }
 });
