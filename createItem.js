@@ -7,22 +7,26 @@ AWS.config.update({region: 'us-east-1'});
 
 // Create the DynamoDB service object
 var ddb = new AWS.DynamoDB({apiVersion: '2012-08-10'});
-var numbah = 145;
-var someValue = numbah.toString();
-
-var scoreArray = {
-  name: 'Dave',
-  anId: someValue,
-  sport: 'biking hiking ttrking'
-}
 
 
+var newTime = new Date();
+var timeId = newTime.getTime();
+var theRandom = String(Math.floor((Math.random() * 9999)));
+var uniqueId = timeId + theRandom;
+var theDate = new Date();
+// Today's date
+theDate = theDate.toString();
+
+// Setup object to place in DynamoDB
 var params = {
-  TableName: 'testerTable',
+  TableName: 'admr_analytics',
   Item: {
-    'theId' : {N: scoreArray.anId},
-    'theSport' : {S: scoreArray.sport},
-    'theName' : {S: scoreArray.name}
+    'analyticsId' : {S: uniqueId},
+    'theDate' : {S: theDate},
+    'theType' : {S: "General Intent"},
+    'theItem' : {S: "Join"},
+    'alexaId' : {S : "adfqwerx44567afdadfR"},
+    'theResponse': {S: "You can join by getting a text message"}
   }
 };
 
